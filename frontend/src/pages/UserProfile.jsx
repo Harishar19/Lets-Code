@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { CameraIcon } from '@heroicons/react/24/outline';
 import { useAuth } from "../context/AuthContext.jsx";
 import Loader from "../components/Loader.jsx";
+import { Linkedin, Github, Twitter, User2Icon } from "lucide-react"
 
 const getCodingStats = (user) => [
     { title: "Problems Solved", value: user.problemsSolved, icon: "", color: "text-red-500" },
@@ -14,6 +15,13 @@ const getCodingStats = (user) => [
     { title: "Current Streak", value: user.currentStreak, icon: "", color: "text-yellow-500" },
     { title: "Maximum Streak", value: user.maximumStreak, icon: "", color: "text-blue-500" },
 ];
+
+const socialIconMap = {
+   github : Github, 
+   linkedin : Linkedin, 
+   twitter : Twitter , 
+   portfolio : User2Icon
+}
 
 const UserProfile = () => {
     const [user, setUser] = useState(null);
@@ -379,13 +387,24 @@ const UserProfile = () => {
                                         ))}
                                     </div>
                                 ) : (
-                                    Object.entries(user.socialLinks).map(([platform, url], idx) => (
-                                        url && url !== "#" && (
-                                            <a key={idx} href={url} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-500 hover:text-white transition shadow-md">
+                                    Object.entries(user.socialLinks).map(([platform, url], idx) => {
+                                        if (!url || url === "#")
+                                            return;
+
+                                        const IconComponent = socialIconMap[platform];
+                                        return (
+                                            <a
+                                                key={idx}
+                                                href={url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-600 hover:text-white transition-all shadow-sm border border-gray-200 dark:border-gray-600 group"
+                                            >
+                                                {IconComponent && <IconComponent className="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-white transition-colors" />}
                                                 <span>{platform.charAt(0).toUpperCase() + platform.slice(1)}</span>
                                             </a>
-                                        )
-                                    ))
+                                        );
+                                    })
                                 )}
                             </div>
                         </Card>

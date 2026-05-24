@@ -191,7 +191,7 @@ cd backend
 
 npm install
 
-cp .env.example to .env
+cp .env.example .env
 
 npm run dev
 ```
@@ -202,7 +202,7 @@ cd frontend
 
 npm install
 
-cp .env.example to .env
+cp .env.example .env
 
 npm run dev
 ```
@@ -244,7 +244,7 @@ Open a PR with a valid feature name and comments
 ## Contact
 Project Link: 
 ```
-https://lets-code-lemon.vercel.app
+https://lets-code.pranava-pai.live
 ```
 
 Developed with ❤️ by Pranava Pai N

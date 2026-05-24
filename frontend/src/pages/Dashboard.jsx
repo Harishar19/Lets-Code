@@ -284,9 +284,19 @@ const Dashboard = () => {
               <TrophyIcon className="w-5 h-5 text-yellow-500" />
               Activity
             </h3>
-            <span className="text-[10px] bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-md font-bold uppercase tracking-wider">
-              Total : {activityData.submissionCount || 0}
-            </span>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => navigate("/submissions")}
+                className="px-3 py-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/40 active:scale-95 border border-indigo-100 dark:border-indigo-900/50 rounded-lg shadow-sm transition-all duration-200 animate-pulse"
+              >
+                View All
+              </button>
+
+              <span className="text-[10px] bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 px-2 py-1 rounded-md font-bold uppercase tracking-wider h-fit">
+                Total : {activityData.submissionCount || 0}
+              </span>
+            </div>
           </div>
 
           <div className="overflow-hidden">

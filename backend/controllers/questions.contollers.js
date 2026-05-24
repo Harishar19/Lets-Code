@@ -12,7 +12,15 @@ dotenv.config();
 
 const getAllQuestions = async (req, res) => {
     try {
-        const allQuestions = await Question.find().sort({ isDailyQuestion: -1, createdAt: -1 });
+        const { type } = req?.query;
+
+        let allQuestions;
+        if(type){
+            allQuestions = await Question.find({ difficultyLevel : type }).sort({ isDailyQuestion: -1, createdAt: -1 });
+        }
+        else{
+            allQuestions = await Question.find().sort({ isDailyQuestion: -1, createdAt: -1 });
+        }
 
         if (!allQuestions)
             return res.status(404).json({
@@ -22,7 +30,7 @@ const getAllQuestions = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "All Questions retrieved suceessfully ..",
+            message: `All Questions retrieved successfully ..`,
             questions: allQuestions
         })
 

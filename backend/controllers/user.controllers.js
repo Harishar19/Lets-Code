@@ -586,8 +586,16 @@ const handleProfileURlChange = async (req, res) => {
 const getallSubmissions = async (req, res) => {
     try {
         const userId = req.user?.id || req.user?._id;
+        const { limit } = req?.query;
 
-        const allSubmissions = await Submissions.find({ user: userId }).sort({ createdAt: -1 })
+        let qlimit;
+
+        if(limit){
+            qlimit = limit;
+        }
+
+
+        const allSubmissions = await Submissions.find({ user: userId }).limit(qlimit).sort({ createdAt: -1 });
 
         if (!allSubmissions || allSubmissions.length === 0)
             return res.status(200).json({

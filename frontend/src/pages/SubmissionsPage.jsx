@@ -9,6 +9,7 @@ const SubmissionsPage = () => {
     const [submissions, setSubmissions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedCode, setSelectedCode] = useState(null);
+    const [limit, setLimit] = useState(5);
     const navigate = useNavigate();
 
 
@@ -16,7 +17,7 @@ const SubmissionsPage = () => {
         const fetchSubmissions = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/submissions`, {
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/submissions?limit=${limit}`, {
                     withCredentials: true
                 });
 
@@ -33,7 +34,7 @@ const SubmissionsPage = () => {
             }
         };
         fetchSubmissions();
-    }, []);
+    }, [limit]);
 
     const getStatusStyle = (status) => {
         return status === 'Accepted'
@@ -46,14 +47,36 @@ const SubmissionsPage = () => {
 
     return (
         <div className="p-6 md:p-10 bg-gray-50 dark:bg-gray-950 min-h-screen">
-            <header className="mb-8">
-                <h1 className="text-3xl font-black text-gray-900 dark:text-white">My <span className="text-indigo-600">Submissions</span></h1>
-                <p className="text-gray-500 dark:text-gray-400">History of all your code attempts</p>
+            <header className="mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+                <div>
+                    <h1 className="text-3xl font-black text-gray-900 dark:text-white">
+                        My <span className="text-indigo-600">Submissions</span>
+                    </h1>
+                    <p className="text-gray-500 dark:text-gray-400">History of all your code attempts</p>
+                </div>
+
+                <div className="flex items-center gap-2 self-end sm:self-auto">
+                    <label htmlFor="limit" className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Show:
+                    </label>
+                    <select
+                        id="limit"
+                        value={limit}
+                        onChange={(e) => setLimit(Number(e.target.value))}
+                        className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-100 text-sm font-medium rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm transition-all"
+                    >
+                        <option value={5}>5 Entries</option>
+                        <option value={10}>10 Entries</option>
+                        <option value={25}>25 Entries</option>
+                        <option value={50}>50 Entries</option>
+                    </select>
+                </div>
             </header>
+
             {submissions.length == 0 ? (
-                <p className="text-gray-500 dark:text-gray-400">Please submit aleast one submission to view your submissions. Currently no submissions</p>
+                <p className="text-gray-500 dark:text-gray-400 mb-4">Please submit aleast one submission to view your submissions. Currently no submissions</p>
             ) : (
-                <p className="text-gray-500 dark:text-gray-400">All your {submissions.length} {submissions.length === 1 ? "Submission" : "Submissions"}</p>
+                <p className="text-gray-500 dark:text-gray-400 mb-4">All your {submissions.length} {submissions.length === 1 ? "Submission" : "Submissions"}</p>
             )}
 
             <Card className="overflow-hidden border-gray-200 dark:border-gray-800">
@@ -77,7 +100,7 @@ const SubmissionsPage = () => {
                                     </tr>
                                 ))
                             ) : submissions.map((sub) => (
-                                <tr key={sub._id} onClick={() => navigate(`/submissions/${sub._id}`)} className="hover:bg-gray-50 dark:hover:bg-gray-900/30 transition-colors">
+                                <tr key={sub._id} onClick={() => navigate(`/submissions/${sub._id}`)} className="hover:bg-gray-50 dark:hover:bg-gray-900/30 transition-colors cursor-pointer">
                                     <td className="p-4">
                                         <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${getStatusStyle(sub.status)}`}>
                                             {sub.status === 'Accepted' ? <CheckCircleIcon className="w-4 h-4" /> : <XCircleIcon className="w-4 h-4" />}
