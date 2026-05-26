@@ -65,17 +65,17 @@ io.on('close' ,() =>{
 
 
 
-app.use("/api/users",userRoutes);
+app.use("/api/v1/users",userRoutes);
 
-app.use("/api/questions",questionRoutes);
+app.use("/api/v1/questions",questionRoutes);
 
-app.use("/api/paths",pathRoutes);
+app.use("/api/v1/paths",pathRoutes);
 
-app.use("/api/discussions",discussionRoutes);
+app.use("/api/v1/discussions",discussionRoutes);
 
-app.use("/api/comments",commentRoutes);
+app.use("/api/v1/comments",commentRoutes);
 
-app.use("/api/notifications",notificationRoutes)
+app.use("/api/v1/notifications",notificationRoutes)
 
 connectDb()
 
