@@ -179,7 +179,7 @@ const Login = () => {
             <FingerPrintIcon className="w-4 h-4 text-indigo-400" />
             Login with PassKey
           </Button>
-            
+
 
         </div>
 
@@ -259,7 +259,7 @@ const Login = () => {
             }}
             onError={() => setTurnstileToken(null)}
             options={{
-              theme: localStorage.getItem("theme"),
+              theme: localStorage.getItem("theme") === "system" ? "auto" : localStorage.getItem("theme"),
               size: "flexible"
             }}
           />

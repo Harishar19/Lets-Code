@@ -314,7 +314,7 @@ const Register = () => {
                         }}
                         onError={() => setTurnstileToken(null)}
                         options={{
-                            theme: localStorage.getItem("theme"),
+                            theme: localStorage.getItem("theme") === "system" ? "auto" : localStorage.getItem("theme"),
                             size: "flexible"
                         }}
                     />
