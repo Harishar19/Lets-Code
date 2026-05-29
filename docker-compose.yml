@@ -1,0 +1,25 @@
+version: '1.1'
+
+
+services:
+  frontend:
+    image: lets-code-frontend
+    build: 
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "5173:5173"
+
+  backend:
+    image: lets-code-backend
+    build: 
+      context: .
+      dockerfile: ./backend/Dockerfile
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - ./backend/.env
+    ports:
+      - "3000:3000"
