@@ -330,7 +330,7 @@ const Register = () => {
             </div>
 
             <p className="mt-8 text-sm font-medium text-gray-400">
-                By signing up, you agree to our <span className="text-gray-600 underline cursor-pointer">Terms</span>
+                By signing up, you agree to our <span className="text-gray-600 underline cursor-pointer"><a href={"/terms"}>Terms</a></span>
             </p>
 
             <Link to="/login" className="mt-4 text-xs font-bold text-indigo-600 uppercase tracking-widest hover:text-indigo-800 transition-colors">

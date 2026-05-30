@@ -46,3 +46,12 @@
 .read-the-docs {
   color: #888;
 }
+
+/* html,body{
+  -ms-overflow-style: none;
+  stroke-width: none;
+}
+
+::-webkit-scrollbar{
+  display: none;
+} */
