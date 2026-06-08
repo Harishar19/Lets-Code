@@ -277,6 +277,9 @@ git push origin feature/AmazingFeature
 Open a PR with a valid feature name and comments
 ```
 
+## License
+The project is licensed under the terms included in the [LICENSE](./LICENSE) file
+
 
 ## Contact
 #### Project Link: 
