@@ -155,7 +155,7 @@ const verifyUser = async (req, res) => {
             message: "User verified successfully . Please Login now ..."
         });
     } catch (error) {
-        console.log("Error verifying token from user . Try Again ...")
+        console.log("Error verifying token from user . Try Again ...",error)
     }
 }
 
@@ -293,7 +293,8 @@ const logoutUser = async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             success: false,
-            message: "Logged out Error . Try Again .."
+            message: "Logged out Error . Try Again ..",
+            error
         });
     }
 }
@@ -346,7 +347,8 @@ const forgotPasswordwithotp = async (req, res) => {
         console.log("Error changing password .");
         return res.status(404).json({
             success: false,
-            message: "Error changing the password . Try Again Later ."
+            message: "Error changing the password . Try Again Later .",
+            error
         });
     }
 }
@@ -585,8 +587,8 @@ const handleProfileURlChange = async (req, res) => {
 
 const getallSubmissions = async (req, res) => {
     try {
-        const userId = req.user?.id || req.user?._id;
-        const { limit } = req?.query;
+        const userId = req.user.id || req.user._id;
+        const { limit } = req.query;
 
         let qlimit;
 
@@ -723,7 +725,7 @@ const getRecentActivity = async (req, res) => {
             activity: recentSubmissions
         })
     } catch (error) {
-        console.log("Error retrieving user's recent activity. Try Again Later ...");
+        console.log("Error retrieving user's recent activity. Try Again Later ...",error);
         throw new ExpressError(400, "Error retrieving user's recent activity.")
     }
 }
@@ -755,7 +757,7 @@ const getGeminiHelp = async (req, res) => {
         res.end();
 
     } catch (error) {
-        console.log("Error from Gemini. Try again later ...");
+        console.log("Error from Gemini. Try again later ...",error);
         if (!res.headersSent) {
             res.status(500).json({ success: false, message: "Internal AI Error" });
         } else {

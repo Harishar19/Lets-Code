@@ -21,7 +21,8 @@ const Dashboard = () => {
 
 
   const fetchLeetcodeStats = useCallback(async (username) => {
-    if (!username) return;
+    if (!username)
+      return;
     setIsSyncing(true);
     try {
       const response = await axios.post(
@@ -207,7 +208,7 @@ const Dashboard = () => {
           </Link>
         </Card>
 
-        <Card className="p-4 bg-yellow-50/50 dark:bg-yellow-900/10 border border-yellow-200/60 dark:border-yellow-700/30 shadow-sm flex flex-col lg:col-span-2 min-h-[160px] justify-between transition-all hover:border-yellow-400">
+        <Card className="p-4 bg-yellow-50/50 dark:bg-yellow-900/10 border border-yellow-200/60 dark:border-yellow-700/30 shadow-sm flex flex-col lg:col-span-2 min-h-40 justify-between transition-all hover:border-yellow-400">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
@@ -235,7 +236,7 @@ const Dashboard = () => {
                 <span className="text-xl font-black text-gray-900 dark:text-white leading-tight">{leetcodeStats.totalSolved}</span>
                 <span className="text-[8px] text-gray-400 uppercase font-black tracking-widest">Solved</span>
               </div>
-              <div className="grid grid-cols-3 gap-1.5 flex-[2]">
+              <div className="grid grid-cols-3 gap-1.5 flex-2">
                 <div className="flex flex-col items-center justify-center py-1 rounded-lg bg-green-500/5 border border-green-500/20">
                   <span className="text-xs font-bold text-green-600 dark:text-green-400">{leetcodeStats.easySolved}</span>
                   <span className="text-[7px] uppercase font-bold text-green-700/60">Easy</span>

@@ -102,7 +102,7 @@ const getallDiscussionforaQuestion = async (req, res) => {
         })
 
     } catch (error) {
-        console.log("Error retrieving discussions for the given question.Try again later ....");
+        console.log("Error retrieving discussions for the given question.Try again later ....",error);
         throw new ExpressError(500, "Internal Server Error");
     }
 }

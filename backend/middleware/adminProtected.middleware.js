@@ -25,7 +25,7 @@ const adminProtected = async (req, res, next) => {
             });
         };
     } catch (error) {
-        return next(new ExpressError(400, "Error checking user role"));
+        return next(new ExpressError(400, `Error checking user role,${error}`));
     }
 
 }

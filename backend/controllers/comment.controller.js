@@ -103,7 +103,7 @@ const getallCommentsforaDiscussion = async (req, res) => {
         })
 
     } catch (error) {
-        console.log("Error retrieving comments for the given discussion.Try again later ....");
+        console.log("Error retrieving comments for the given discussion.Try again later ....",error);
         throw new ExpressError(500, "Internal Server Error");
     }
 }

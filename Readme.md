@@ -178,35 +178,50 @@ backend
 
 ## Installation & Local Setup
 
-### 1. Clone the repository
+### A. Clone the repository
 ```bash
 git clone https://github.com/your-userName/Lets-Code.git
 
 cd Lets-Code
 ```
 
-### 2. Backend Configuration
-```bash
-cd backend
+### B. Two Methods for working with the project
 
-npm install
+1. ### Run backend and frontend seperately
 
-npm run dev:setup  # This command scans sample env file and generates hex values for .env file
+- Backend Configuration:
 
-npm run dev
-```
+    ```bash
+    cd backend
 
-### 3. Frontend Configuration
-```bash
-cd frontend
+    npm install
 
-npm install
+    npm run dev:setup  # This command scans sample env file and generates hex values for .env file
 
-cp .env.example .env
+    npm run dev
+    ```
 
-npm run dev
-```
+- Frontend Configuration:
+    ```bash
+    cd frontend
 
+    npm install
+
+    cp .env.example .env
+
+    npm run dev
+    ```
+
+2. ### Run backend and frontend together
+    ```bash
+    cd Lets-Code
+
+    npm install  # First install the concurrently module to run both the backend and frontend together
+
+    npm install-all    # Uses concurrently module - Frontend is denoted by red and backend is denoted by blue
+
+    npm run dev   # Run both the frontend and backend together in a single terminal
+    ```
 
 ## Docker Setup
 This repository includes a `docker-compose.yml` in the root-directory that builds both frontend and backend services.

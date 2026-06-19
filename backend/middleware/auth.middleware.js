@@ -29,7 +29,7 @@ const checkAuth = async (req, res, next) => {
             });
 
         }
-        if (error instanceof jwt.JsonWebTokenError || error instanceof TokenError) {
+        if (error instanceof jwt.JsonWebTokenError || error instanceof jwt.TokenExpiredError) {
             return res.status(401).json({
                 success: false,
                 message: 'Invalid Token',

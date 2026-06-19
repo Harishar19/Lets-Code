@@ -12,7 +12,7 @@ dotenv.config();
 
 const getAllQuestions = async (req, res) => {
     try {
-        const { type } = req?.query;
+        const { type } = req.query;
 
         let allQuestions;
         if(type){
@@ -39,27 +39,6 @@ const getAllQuestions = async (req, res) => {
     }
 }
 
-const isDailyQuestion = async (questionId) => {
-    try {
-        if (!questionId)
-            throw new ExpressError(404, "Please provide a question Id");
-
-        const question = await Question.findById(questionId);
-
-        if (!question)
-            return res.status(404).json({
-                success: false,
-                message: "Question not found . Please try again ."
-            })
-
-        const isDaily = question.isDailyQuestion;
-
-        return isDaily;
-
-    } catch (error) {
-        console.log("Error in retrieving daily question or not : ", error);
-    }
-}
 
 const addQuestion = async (req, res) => {
     try {
@@ -455,7 +434,7 @@ const makeaDailyQuestion = async (req, res) => {
 }
 const questionController = {
     getAllQuestions,
-    isDailyQuestion,
+    // isDailyQuestion,
     addQuestion,
     getQuestionById,
     runaQuestion,

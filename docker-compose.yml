@@ -6,7 +6,7 @@ services:
     image: lets-code-frontend
     build: 
       context: ./frontend
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     env_file:
       - ./frontend/.env
     ports:
@@ -16,7 +16,7 @@ services:
     image: lets-code-backend
     build: 
       context: ./backend
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     environment:
       - NODE_ENV=production
     env_file:
