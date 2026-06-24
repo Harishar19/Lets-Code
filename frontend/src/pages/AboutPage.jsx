@@ -9,7 +9,7 @@ import {
 const AboutPage = () => {
   return (
     <div className="min-h-screen bg-[#FDFDFF] dark:bg-slate-950 text-slate-900 dark:text-gray-100 selection:bg-indigo-100 selection:text-indigo-700 font-sans">
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-40"></div>
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[32px_32px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-40"></div>
 
       <main className="relative z-10 max-w-5xl mx-auto px-6 pt-24 pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
@@ -45,7 +45,7 @@ const AboutPage = () => {
                 {Object.entries({
                   Github: "https://github.com/Pranava-Pai-N",
                   LinkedIn: "https://in.linkedin.com/in/pranav-pai-n-563106292/",
-                  Portfolio : "https://pranava-pai.vercel.app"
+                  Portfolio : "https://pranava-pai.live"
                 }).map(([platform, url]) => (
                   <a
                     key={platform}

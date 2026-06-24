@@ -155,7 +155,7 @@ const verifyUser = async (req, res) => {
             message: "User verified successfully . Please Login now ..."
         });
     } catch (error) {
-        console.log("Error verifying token from user . Try Again ...",error)
+        console.log("Error verifying token from user . Try Again ...", error)
     }
 }
 
@@ -333,15 +333,21 @@ const forgotPasswordwithotp = async (req, res) => {
 
         await user.save();
 
-        sendOtpEmail(user.email, user.userName, otp).catch((err) => {
-            console.error("Background Email Error:", err);
-        });
+        const response = await sendOtpEmail(user.email, user.userName, otp);
 
-        return res.status(200).json({
-            success: true,
-            message: `A Email with OTP has been sent to ${user.email} to reset your password`
-        });
-
+        if (response.accepted) {
+            return res.status(200).json({
+                success: true,
+                message: `A Email with OTP has been sent to ${user.email} to reset your password`
+            });
+        }
+        else if (response.rejected) {
+            return res.status(400).json({
+                success: false,
+                message: `Error sending email.Please try again later`,
+                response: response.response
+            });
+        }
 
     } catch (error) {
         console.log("Error changing password .");
@@ -592,7 +598,7 @@ const getallSubmissions = async (req, res) => {
 
         let qlimit;
 
-        if(limit){
+        if (limit) {
             qlimit = limit;
         }
 
@@ -725,7 +731,7 @@ const getRecentActivity = async (req, res) => {
             activity: recentSubmissions
         })
     } catch (error) {
-        console.log("Error retrieving user's recent activity. Try Again Later ...",error);
+        console.log("Error retrieving user's recent activity. Try Again Later ...", error);
         throw new ExpressError(400, "Error retrieving user's recent activity.")
     }
 }
@@ -757,7 +763,7 @@ const getGeminiHelp = async (req, res) => {
         res.end();
 
     } catch (error) {
-        console.log("Error from Gemini. Try again later ...",error);
+        console.log("Error from Gemini. Try again later ...", error);
         if (!res.headersSent) {
             res.status(500).json({ success: false, message: "Internal AI Error" });
         } else {
